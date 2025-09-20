@@ -1,0 +1,113 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8">
+  <title>Laskar Pelagi - Apongxdcode</title>
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css">
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@700&display=swap" rel="stylesheet">
+  <style>
+    body {
+  font-family: 'Poppins', sans-serif;
+  display: flex;
+  flex-direction: column;
+  height: 100vh;
+  justify-content: center;
+  align-items: center;
+  background: 
+    linear-gradient(rgba(0, 0, 0, 0.8), rgba(0, 0, 0, 0.5)),
+    url('https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRsTwpZilxozqgwMGEpJGSNSIQmd4JRqEMcIN-dyXS1UNE_F2upSIqGVSwo&s=10');
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+  color: white;
+}
+
+    .btn-mulai {
+      background-color: #1E90FF;
+      color: white;
+      font-size: 1.5rem;
+      padding: 12px 30px;
+      margin-bottom: 20px;
+      border-radius: 20px;
+      cursor: pointer;
+      transition: transform 0.1s ease, box-shadow 0.1s ease;
+      box-shadow: 0 5px 10px rgba(0, 0, 0, 0.2);
+    }
+    
+    .btn-mulai:active {
+      box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
+    }
+
+    .typewriter-text {
+      font-size: 1.2rem;
+      font-family: 'Poppins', sans-serif;
+      border-right: 2px solid #333;
+      white-space: nowrap;
+      overflow: hidden;
+    }
+  </style>
+</head>
+<body>
+  <h2 id="judul">Laskar Pelagi</h2>
+  <button class="btn btn-mulai" id="Mulai" onclick="mulaiMusik()">
+    Mulai
+  </button>
+
+  <div class="typewriter-text" id="teks"></div>
+
+  <audio id="musik" src="sound.mp3"></audio>
+
+  <script>
+    const teksList = [
+      { text: "Walau hidupp", kecepatan: 60, delay: 1000 },
+      { text: "Kadang TAK adilllll", kecepatan: 70, delay: 800 },
+      { text: "Tapi Cinta lengkapii kitaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa", kecepatan: 78, delay: 900 },
+      { text: "Hoooooo", kecepatan: 80, delay: 90 },
+      { text: "Menari lah dan terus tertawaaaaa", kecepatan: 60, delay: 800 },
+      { text: "Walau dunia tak seindahhh surgaaaaaa", kecepatan: 85, delay: 900 },
+      { text: "bersyukur lah pada yang kuasaaaaa", kecepatan: 80, delay: 900 },
+      { text: "cinta kita di duniaaaaaaaaaaaaaaaaaaaaa", kecepatan: 90, delay: 900 },
+      { text: "selamanya", kecepatan: 80, delay: 900 }
+    ];
+
+    let teksContainer = document.getElementById("teks");
+
+    //=== Apongxdcode ===\\
+    function ketikTeks(teks, kecepatan, callback) {
+      let i = 0;
+      teksContainer.textContent = "";
+      const interval = setInterval(() => {
+        if (i < teks.length) {
+          teksContainer.textContent += teks.charAt(i);
+          i++;
+        } else {
+          clearInterval(interval);
+          setTimeout(callback, 400);
+        }
+      }, kecepatan);
+    }
+
+    function mulaiAnimasiTeks(index = 0) {
+      if (index < teksList.length) {
+        const { text, kecepatan, delay } = teksList[index];
+        ketikTeks(text, kecepatan, () => {
+          setTimeout(() => mulaiAnimasiTeks(index + 1), delay);
+        });
+      }
+    }
+
+    function mulaiMusik() {
+      const audio = document.getElementById("musik");
+      audio.play();
+      
+      document.getElementById("Mulai").style.display = "none";
+      document.getElementById("judul").style.display = "none";
+      
+      setTimeout(() => {
+    mulaiAnimasiTeks();
+  }, 500);
+    }
+  </script>
+
+</body>
+</html>
